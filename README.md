@@ -21,3 +21,7 @@ Complete Todos 1-10
 Complete Todos 1-5
 
 #Git commands 
+Save it:
+git add -A
+git commit -m 'A basic website'
+git push
