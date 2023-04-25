@@ -18,15 +18,19 @@
  *  c. how do you access individual characters of a String?
  *  d. how do you concatenate Strings? What operator do we use?
  */
-
+var i = 0
 function reverseString(input) {
-    // YOUR CODE GOES BELOW HERE //
-    
-    
-    
-    
-    // YOUR CODE GOES ABOVE HERE //
+  // YOUR CODE GOES BELOW HERE //
+  var arg = [];
+  for(i = input.length - 1; i >= 0; i--){
+    arg.push(input[i]);
+    }
+  return arg.join('');
+  
+
+  // YOUR CODE GOES ABOVE HERE //
 }
+
 
 
 
