@@ -1,7 +1,7 @@
 // #!/usr/bin/env node
 
 'use strict';
-
+arr = [1, 2, 3, 4, 5]
 /**
  * IN CLASS EXERCISE: LOOPS
  */
@@ -12,20 +12,28 @@
  */
 function printArrayValues(array) {
   // YOUR CODE BELOW HERE //
-  
+  let i = 0;
+  while(i < array.length){
+    console.log(array[i]);
+    i++;
+  }
   
   
   
   // YOUR CODE ABOVE HERE //
 }
-
+printArrayValues(arr)
 /** 
  * Given an input Array, loop backwards over the Array and print its values 
  * using console.log().
  */
 function printArrayValuesInReverse(array) {
   // YOUR CODE BELOW HERE //
-  
+  let i = array.length - 1;
+  while(i >= 0){
+    console.log(array[i]);
+    i--
+  }
   
   
   
@@ -37,8 +45,11 @@ function printArrayValuesInReverse(array) {
  */
 function getObjectKeys(object) {
   // YOUR CODE BELOW HERE //
-  
-  
+  var arr = [];
+  for(var key in object){
+    arr.push(key);
+  }
+  return arr;
   
   
   // YOUR CODE ABOVE HERE //
@@ -50,8 +61,9 @@ function getObjectKeys(object) {
  */
 function printObjectKeys(object) {
   // YOUR CODE BELOW HERE //
-  
-  
+  for(var key in object){
+  console.log(key);
+  }
   
   
   // YOUR CODE ABOVE HERE //
@@ -62,8 +74,11 @@ function printObjectKeys(object) {
  */
 function getObjectValues(object) {
   // YOUR CODE BELOW HERE //
-  
-  
+  var arr = [];
+  for(var key in object){
+  arr.push(object[key]);
+  }
+  return arr;
   
   
   // YOUR CODE ABOVE HERE //
@@ -75,8 +90,9 @@ function getObjectValues(object) {
  */
 function printObjectValues(object) {
   // YOUR CODE BELOW HERE //
-  
-  
+  for(var key in object){
+    console.log(object[key]);
+    }  
   
   
   // YOUR CODE ABOVE HERE //
@@ -87,7 +103,15 @@ function printObjectValues(object) {
  */
 function getObjectLength(object) {
   // YOUR CODE BELOW HERE //
+  var x = 0;
+  for(var key in object){
+    if(object.hasOwnProperty(key)){
+      x++
+    }
   
+    }  
+  return x;
+
   
   
   
@@ -100,12 +124,13 @@ function getObjectLength(object) {
  */
 function printObjectValuesInReverse(object) {
   // YOUR CODE BELOW HERE //
-  
-  
-  
-  
-  // YOUR CODE ABOVE HERE //
-}
+  var i = 0;
+  for(i = getObjectLength(object) - 1; i >= 0; i--){
+  console.log(getObjectValues(object)[i]);
+   }
+
+  }
+
 
 
 
