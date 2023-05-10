@@ -241,12 +241,15 @@ _.unique = function(array) {
 * Extra Credit:
 *   use _.each in your implementation
 */
-_.unique = filter(array, func) {
-    arr = [];
-    func(array[i], i, array)
+_.filter = function(array, func){
+  var store = [];
+  _.each(array, function(elem, i, array){
+    if(func(elem, i, array)){
+    store.push(elem);
     }
-    return arr;
-
+});
+return store;  
+}
 
 /** _.reject
 * Arguments:
@@ -260,8 +263,15 @@ _.unique = filter(array, func) {
 * Examples:
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
-
-
+_.reject = function(array, func){
+  var store = [];
+  _.each(array, function(elem, i, array){
+    if(!func(elem, i, array)){
+    store.push(elem);
+    }
+});
+return store;  
+}
 /** _.partition
 * Arguments:
 *   1) An array
@@ -280,7 +290,19 @@ _.unique = filter(array, func) {
 *   }); -> [[2,4],[1,3,5]]
 }
 */
-
+_.partition = function(array, func){
+  var storeTrue = [];
+  var storeFalse = [];
+  _.each(array, function(elem, i, array){
+    if(func(elem, i, array)){
+    storeTrue.push(elem);
+    }
+    else if(!func(elem, i, array)){
+      storeFalse.push(elem);   
+  }
+});
+return[storeTrue, storeFalse];
+}
 
 /** _.map
 * Arguments:
@@ -297,7 +319,22 @@ _.unique = filter(array, func) {
 * Examples:
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
-
+_.map = function(collection, func){
+  //determine if collection is array
+  var store = [];
+  if (Array.isArray(collection)){
+      //iterate through collection
+      for (let i = 0; i < collection.length; i++){
+          store.push(func(collection[i], i, collection));
+      }
+  }
+  else {
+    for (let key in collection){
+          store.push(func(collection[key], key, collection));
+      }
+  }
+  return store;
+}
 
 /** _.pluck
 * Arguments:
@@ -309,7 +346,12 @@ _.unique = filter(array, func) {
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
-
+_.pluck = function(array, prop){
+  return _.map(
+  array, function(obj){
+  return obj[prop];
+  });
+}
 
 /** _.every
 * Arguments:
@@ -331,7 +373,20 @@ _.unique = filter(array, func) {
 *   _.every([2,4,6], function(e){return e % 2 === 0}) -> true
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
-
+_.every = function(collection, func) {
+var answer = true;
+_.each(collection, function(elem, i, collection) {
+  if(func === undefined){
+    if(!elem){
+      answer = false;
+    } 
+  }
+  else if(!func(elem, i, collection)) {
+  answer = false;
+}
+});
+return answer;
+};
 
 /** _.some
 * Arguments:
@@ -353,7 +408,20 @@ _.unique = filter(array, func) {
 *   _.some([1,3,5], function(e){return e % 2 === 0}) -> false
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
-
+_.some = function(collection, func) {
+  var answer = false;
+  _.each(collection, function(elem, i, collection) {
+    if(func === undefined){
+      if(elem){
+        answer = true;
+      } 
+    }
+    else if(func(elem, i, collection)) {
+    answer = true;
+  }
+  });
+  return answer;
+  };
 
 /** _.reduce
 * Arguments:
@@ -373,7 +441,25 @@ _.unique = filter(array, func) {
 * Examples:
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
+_.reduce = function (array, func, seed){
+  let result;
+  //determine if no seed was given
+  if(seed === undefined) {
+      //use first element of array as seed
+      result = array[0];
+      for (let i = 1; i < array.length; i++){
+          //reassing result to func invocation
+          result = func(result, array[i], i, array);
+      }
 
+  } else {
+      result = seed;
+      for( let i = 0; i < array.length; i++){
+          result = func(result, array[i], i, array);
+      }
+  }
+  return result; 
+}
 
 /** _.extend
 * Arguments:
@@ -389,6 +475,15 @@ _.unique = filter(array, func) {
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
+
+_.extend = function(object, ...objects) {
+  _.each(objects, function(obj) {
+    _.each(obj, function(value, key) {
+      object[key] = value;
+    });
+  });
+  return object;
+};
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
